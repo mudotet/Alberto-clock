@@ -64,5 +64,3 @@ Cấu trúc thư mục của dự án được tổ chức theo mô hình **MVC 
 ### Tóm tắt:
 
 Cấu trúc thư mục này giúp bạn tổ chức dự án một cách dễ hiểu, dễ bảo trì, và dễ phát triển. Các thành viên trong nhóm sẽ dễ dàng hiểu được cách thức hoạt động của từng phần trong dự án và có thể đóng góp vào các phần khác nhau mà không gặp phải sự chồng chéo.
-
-
