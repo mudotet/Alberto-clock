@@ -22,28 +22,27 @@
         <div class="collapse navbar-collapse" id="mainNavbar">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-                <a class="nav-link-custom active" href="#">Home</a>
+                <a class="nav-link-custom active" href="../views/index.php">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link-custom" href="#">Features</a>
+                <a class="nav-link-custom" href="../views/products.php">Products</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link-custom" href="#">Products</a>
+                <a class="nav-link-custom" href="../views/news.php">New</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link-custom" href="#">New</a>
+                        <li class="nav-item">
+                <a class="nav-link-custom" href="../views/about_us.php">About us</a>
             </li>
         </ul>
 
-        <div class="d-flex align-items-center gap-3">
+        <div class="d-flex align-items-center gap-3"> 
         <a href="#" class="nav-link-custom"> 
             <i class="fa-solid fa-cart-shopping fa-lg"></i>
         </a>
-        <a href="#" class="nav-link-custom">Login</a>
+        <a href="../views/login.php" class="nav-link-custom">Login</a>
         </div>
     </nav>
   </header>
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
