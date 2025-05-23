@@ -46,3 +46,10 @@ VALUES
 (3, 'Rolex 8', 5800.00, 'Luxury', 'Rolex mẫu 8', 7, 'images/Ảnh đồng hồ/rolex/rolex8.png'),
 (3, 'Rolex 9', 5900.00, 'Luxury', 'Rolex mẫu 9', 7, 'images/Ảnh đồng hồ/rolex/rolex9.png'),
 (3, 'Rolex 10', 6000.00, 'Luxury', 'Rolex mẫu 10', 7, 'images/Ảnh đồng hồ/rolex/rolex10.png');
+
+-- -- --------------------------------------------------------
+--Bảng roles
+--
+INSERT INTO roles (role_id, role_name, role_description) VALUES
+(1, 'Admin', 'Quản trị hệ thống'),
+(2, 'Customer', 'Khách hàng thông thường');
