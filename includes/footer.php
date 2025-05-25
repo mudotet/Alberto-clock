@@ -7,6 +7,7 @@
     <title>Alberto Clock Footer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css_includes/footer.css">
 </head>
 
 <body>
@@ -16,7 +17,7 @@
             <div class="row align-items-center">
                 <!-- Logo trái -->
                 <div class="col-md-3 text-start">
-                    <img src="../assets/logo.png" alt="Alberto Clock" style="width: 180px; height: 100px;">
+                    <img src="../assets/images/logo.png" alt="Alberto Clock" style="width: 180px; height: 100px;">
                 </div>
                 <!-- Thông tin phải -->
                 <div class="col-md-9 text-end">
