@@ -15,10 +15,7 @@
             <a class="nav-link-custom active" href="../views/index.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link-custom" href="../views/products.php">Products</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link-custom" href="../views/news.php">New</a>
+            <a class="nav-link-custom" href="../views/news.php">News</a>
           </li>
           <li class="nav-item">
             <a class="nav-link-custom" href="../views/about_us.php">About us</a>

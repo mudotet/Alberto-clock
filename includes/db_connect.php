@@ -1,6 +1,5 @@
 <?php 
-    class Db_connect{
-
+    class Db_connect {
         public static function getConnection(){
             $host = "localhost";
             $db_name = "alberto_clock";
@@ -13,6 +12,8 @@
             } catch(PDOException $exception){
                 echo "Connection error: " . $exception->getMessage();
             }
+            return $conn; 
         }
     }
+
 ?>
