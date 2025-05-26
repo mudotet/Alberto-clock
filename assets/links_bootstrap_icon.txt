@@ -6,3 +6,9 @@ link bootstrap js:
 
 Link icon sử dụng fontawesome
 <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
+<- bảng màu ->
+924F0D màu nâu đậm
+8D4A06 màu header, footer
+B27F54 màu nâu nhạt
+010500 màu đen
