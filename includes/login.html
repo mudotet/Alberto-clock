@@ -1,26 +1,3 @@
-<?php
-session_start();
-
-// Xử lý đăng nhập
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    
-    // Kiểm tra thông tin đăng nhập (đơn giản)
-    $valid_username = 'admin';
-    $valid_password = '123456';
-    
-    if ($username === $valid_username && $password === $valid_password) {
-        $_SESSION['loggedin'] = true;
-        $_SESSION['username'] = $username;
-        header('Location: welcome.php');
-        exit;
-    } else {
-        $error = "Tên đăng nhập hoặc mật khẩu không đúng!";
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: hwb(240 96% 2% / 0.962);
+            background-color: #f4f4f9;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -38,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             margin: 0;
         }
         .login-form {
-            background: rgba(255, 255, 255, 0.9);
+            background: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -72,24 +49,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             cursor: pointer;
         }
         .form-group button:hover {
-            background-color: #001eb3;
-        }
-        .error {
-            color: red;
-            text-align: center;
-            margin-bottom: 15px;
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
     <div class="login-form">
         <h2>Đăng Nhập</h2>
-        
-        <?php if (isset($error)): ?>
-            <div class="error"><?php echo $error; ?></div>
-        <?php endif; ?>
-        
-        <form id="loginForm" method="POST" action="login.php">
+        <form id="loginForm">
             <div class="form-group">
                 <label for="username">Tên đăng nhập:</label>
                 <input type="text" id="username" name="username" required>
@@ -103,5 +70,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </form>
     </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            alert(`Đăng nhập với:\nTài khoản: ${username}\nMật khẩu: ${password}`);
+            // Thêm xử lý AJAX hoặc kiểm tra đăng nhập ở đây
+        });
+    </script>
 </body>
 </html>
