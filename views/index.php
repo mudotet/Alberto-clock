@@ -11,9 +11,8 @@
   <link rel="stylesheet" href="../includes/css_includes/header.css">
 </head>
 <body>
-
 <?php include '../includes/header.php'; ?>
-
+<?php include '../includes/banner.php'; ?>
 <!-- Nội dung chính -->
 <div class="container my-5">
   <h1>Chào mừng đến với Alberto Clock</h1>
