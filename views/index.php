@@ -46,6 +46,7 @@ $totalPages = ceil($total / $limit);
 </head>
 <body>
 <?php include '../includes/header.php'; ?>
+<?php include '../includes/banner.php'; ?>
 
 <!-- Nội dung chính -->
 <div class="container my-5">
