@@ -45,9 +45,10 @@ $totalPages = ceil($total / $limit);
   </style>
 </head>
 <body>
-
 <?php include '../includes/header.php'; ?>
+<?php include '../includes/banner.php'; ?>
 
+<!-- Nội dung chính -->
 <div class="container my-5">
   <h2 class="text-center mb-4">ĐỒNG HỒ NAM BÁN CHẠY</h2>
 
