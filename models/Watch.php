@@ -10,7 +10,7 @@ class Watch {
 
     // CREATE - Thêm đồng hồ mới
     public function createWatch($data) {
-        $sql = "INSERT INTO Watches (
+        $sql = "INSERT INTO watches (
                     brand_id, model, price, type, description,
                     store_quantity, purchase_date, watches_images
                 ) VALUES (
@@ -33,14 +33,14 @@ class Watch {
 
     // READ - Lấy danh sách tất cả đồng hồ
     public function getAllWatches() {
-        $sql = "SELECT * FROM Watches";
+        $sql = "SELECT * FROM watches";
         $stmt = $this->conn->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // READ - Lấy thông tin đồng hồ theo ID
     public function getWatchById($watch_id) {
-        $sql = "SELECT * FROM Watches WHERE watch_id = :watch_id";
+        $sql = "SELECT * FROM watches WHERE watch_id = :watch_id";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([':watch_id' => $watch_id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -48,7 +48,7 @@ class Watch {
 
     // UPDATE - Cập nhật thông tin đồng hồ
     public function updateWatch($watch_id, $data) {
-        $sql = "UPDATE Watches SET
+        $sql = "UPDATE watches SET
                     brand_id = :brand_id,
                     model = :model,
                     price = :price,
@@ -75,14 +75,14 @@ class Watch {
 
     // DELETE - Xóa đồng hồ
     public function deleteWatch($watch_id) {
-        $sql = "DELETE FROM Watches WHERE watch_id = :watch_id";
+        $sql = "DELETE FROM watches WHERE watch_id = :watch_id";
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([':watch_id' => $watch_id]);
     }
 
     // BONUS - Lọc theo loại đồng hồ (Luxury, Fashion, v.v.)
     public function getWatchesByType($type) {
-        $sql = "SELECT * FROM Watches WHERE type = :type";
+        $sql = "SELECT * FROM watches WHERE type = :type";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([':type' => $type]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -90,23 +90,44 @@ class Watch {
 
     // BONUS - Lấy đồng hồ theo hãng
     public function getWatchesByBrand($brand_id) {
-        $sql = "SELECT * FROM Watches WHERE brand_id = :brand_id";
+        $sql = "SELECT watches.* FROM watches INNER JOIN brands ON watches.brand_id = brands.brand_id WHERE watches.brand_id = :brand_id";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([':brand_id' => $brand_id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getWatchesByKeyword($keyword) {
-        $sql = "SELECT * FROM Watches WHERE model LIKE :keyword OR description LIKE :keyword";
+        $sql = "SELECT * FROM watches WHERE model LIKE :keyword OR description LIKE :keyword";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([':keyword' => '%' . $keyword . '%']);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getWatchesByPriceRange($min_price, $max_price) {
-        $sql = "SELECT * FROM Watches WHERE price BETWEEN :min_price AND :max_price";
+        $sql = "SELECT * FROM watches WHERE price BETWEEN :min_price AND :max_price";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([':min_price' => $min_price, ':max_price' => $max_price]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getWatchesByBrandPaginated($brand_id, $limit, $offset) {
+        $sql = "SELECT w.*, b.brand_name FROM watches w
+                JOIN brands b ON w.brand_id = b.brand_id
+                WHERE w.brand_id = :brand_id
+                LIMIT :limit OFFSET :offset";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':brand_id', $brand_id, PDO::PARAM_INT);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function countWatchesByBrand($brand_id) {
+        $sql = "SELECT COUNT(*) as total FROM watches WHERE brand_id = :brand_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([':brand_id' => $brand_id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
     }
 }
