@@ -27,9 +27,6 @@
       <div class="d-flex flex-wrap gap-4 text-uppercase fw-bold fs-6 mb-2 mb-md-0">
         <a href="#" class="text-light text-decoration-none">About Us</a>
         <a href="#" class="text-light text-decoration-none">Contact Us</a>
-        <a href="#" class="text-light text-decoration-none">Help</a>
-        <a href="#" class="text-light text-decoration-none">Privacy Policy</a>
-        <a href="#" class="text-light text-decoration-none">Disclaimer</a>
       </div>
       <div class="text-center text-md-end text-light small">
         <p class="mb-0">© 2025 Alberto Clock. All rights reserved.</p>

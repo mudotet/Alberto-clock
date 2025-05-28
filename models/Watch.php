@@ -6,6 +6,9 @@ class Watch {
 
     public function __construct() {
         $this->conn = Db_connect::getConnection();
+        if ($this->conn === null) {
+            throw new Exception('Database connection failed.');
+        }
     }
 
     // CREATE - Thêm đồng hồ mới
