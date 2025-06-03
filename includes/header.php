@@ -79,7 +79,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
           $cartDetailModel = new CartDetail();
           $cart = $cartModel->getOpenCartByUser($_SESSION['user']['id']);
           if ($cart) {
-              $items = $cartDetailModel->getCartDetailsWithInfo($cart['cart_id']);
+              $items = $cartDetailModel->getDetailsByCartId($cart['cart_id']);
               if ($items) {
                   echo '<table class="table table-sm">';
                   echo '<thead><tr><th>Sản phẩm</th><th>SL</th><th>Giá</th></tr></thead><tbody>';
