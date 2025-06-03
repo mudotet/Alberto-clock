@@ -42,9 +42,13 @@ if (!$watchDetail) {
         <li class="list-group-item"><strong>Số lượng còn:</strong> <?= $watchDetail['store_quantity'] ?></li>
         <li class="list-group-item"><strong>Ngày nhập:</strong> <?= date('d/m/Y', strtotime($watchDetail['purchase_date'])) ?></li>
       </ul>
-      <button class="btn btn-outline-secondary me-2">
-        <i class="fa-solid fa-cart-shopping me-1"></i> Thêm vào giỏ
-      </button>
+      <form method="post" action="../controllers/add_to_cart.php" class="d-inline">
+        <input type="hidden" name="watch_id" value="<?= $watchDetail['watch_id'] ?>">
+        <input type="hidden" name="quantity" value="1">
+        <button type="submit" class="btn btn-outline-secondary me-2">
+          <i class="fa-solid fa-cart-shopping me-1"></i> Thêm vào giỏ
+        </button>
+      </form>
       <button class="btn btn-dark">
         <i class="fa-solid fa-bolt me-1"></i> Mua ngay
       </button>
