@@ -69,12 +69,41 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
 <div class="sidebar" id="cartSidebar">
   <div class="sidebar-content">
     <button class="btn-close" id="closeSidebar" aria-label="Close">X</button>
-    <h4>Your Shopping Cart</h4>
+    <h4>Giỏ hàng của bạn</h4>
     <div id="cart-items">
-      <p>Your cart is empty.</p>
-      <!-- Cart items can be added dynamically here -->
+      <?php
+      if (isset($_SESSION['user'])) {
+          require_once '../models/Cart.php';
+          require_once '../models/CartDetail.php';
+          $cartModel = new Cart();
+          $cartDetailModel = new CartDetail();
+          $cart = $cartModel->getOpenCartByUser($_SESSION['user']['id']);
+          if ($cart) {
+              $items = $cartDetailModel->getCartDetailsWithInfo($cart['cart_id']);
+              if ($items) {
+                  echo '<table class="table table-sm">';
+                  echo '<thead><tr><th>Sản phẩm</th><th>SL</th><th>Giá</th></tr></thead><tbody>';
+                  foreach ($items as $item) {
+                      echo '<tr>';
+                      echo '<td>' . htmlspecialchars($item['model']) . '</td>';
+                      echo '<td>' . (int)$item['quantity'] . '</td>';
+                      echo '<td>' . number_format($item['item_price'], 0, ',', '.') . ' VNĐ</td>';
+                      echo '</tr>';
+                  }
+                  echo '</tbody></table>';
+                  echo '<div class="fw-bold text-end">Tổng: ' . number_format($cart['total_amount'], 0, ',', '.') . ' VNĐ</div>';
+              } else {
+                  echo '<p>Giỏ hàng trống.</p>';
+              }
+          } else {
+              echo '<p>Giỏ hàng trống.</p>';
+          }
+      } else {
+          echo '<p>Bạn chưa đăng nhập.</p>';
+      }
+      ?>
     </div>
-    <button class="btn btn-primary">Go to Checkout</button>
+    <button class="btn btn-primary">Xem chi tiết giỏ hàng</button>
   </div>
 </div>
 
