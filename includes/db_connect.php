@@ -3,7 +3,7 @@ class Db_connect{
 
     public static function getConnection(){
         $host = "localhost";
-        $db_name = "aberto_clock";
+        $db_name = "alberto_clock";
         $username = "root";
         $password = "";
         $conn = null;
