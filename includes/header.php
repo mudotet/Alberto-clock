@@ -3,7 +3,7 @@ session_start();
 $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
 ?>
 <header>
-  <link rel="stylesheet" href="../assets/css/header.css"> 
+  <link rel="stylesheet" href="../includes/css_includes/header.css"> 
   <nav class="navbar navbar-expand-lg custom-navbar shadow-sm">
     <div class="container">
       <a class="navbar-brand" href="../views/index.php">

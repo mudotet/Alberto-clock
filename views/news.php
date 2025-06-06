@@ -25,7 +25,7 @@
             <!-- News Article 1 -->
             <div class="col-md-6 col-lg-4">
                 <div class="card h-100 shadow-sm">
-                    <img src="../assets/images/news1.jpg" class="card-img-top" alt="New Collection Launch">
+                    <img src="../assets/images/Thumnail/5-e1691031880893-646x400.jpg" class="card-img-top" alt="New Collection Launch">
                     <div class="card-body">
                         <h5 class="card-title">New Collection Launch</h5>
                         <p class="card-text">Discover our latest luxury watch collection, featuring innovative designs and timeless craftsmanship.</p>
@@ -37,7 +37,7 @@
             <!-- News Article 2 -->
             <div class="col-md-6 col-lg-4">
                 <div class="card h-100 shadow-sm">
-                    <img src="../assets/images/news2.jpg" class="card-img-top" alt="Watchmaking Event">
+                    <img src="../assets/images/Thumnail/one_of_the_worlds_costliest_watches-_patek_philippe_1977.jpg" class="card-img-top" alt="Watchmaking Event">
                     <div class="card-body">
                         <h5 class="card-title">Exclusive Watchmaking Event</h5>
                         <p class="card-text">Join us for an exclusive event showcasing the art of watchmaking with our master artisans.</p>
@@ -49,7 +49,7 @@
             <!-- News Article 3 -->
             <div class="col-md-6 col-lg-4">
                 <div class="card h-100 shadow-sm">
-                    <img src="../assets/images/news3.jpg" class="card-img-top" alt="Sustainability Initiative">
+                    <img src="../assets/images/Thumnail/space_invaders-_omega_1967_0_rectangle_1711332223.jpg.webp" class="card-img-top" alt="Sustainability Initiative">
                     <div class="card-body">
                         <h5 class="card-title">Sustainability Initiative</h5>
                         <p class="card-text">Learn about our commitment to sustainable practices in luxury watch production.</p>
