@@ -1,6 +1,4 @@
 <?php
-// filepath: c:\xampp\htdocs\PHP\alberto-clock\models\Cart.php
-
 require_once '../includes/db_connect.php';
 
 class Cart
@@ -15,20 +13,12 @@ class Cart
         }
     }
 
-    // Tạo giỏ hàng mới cho user (nếu chưa có giỏ hàng đang mở)
+    // Tạo giỏ hàng mới cho user
     public function createCart($user_id)
     {
-        $stmt = $this->conn->prepare("INSERT INTO cart (user_id, status, created_at, total_amount) VALUES (:user_id, 0, NOW(), 0)");
+        $stmt = $this->conn->prepare("INSERT INTO cart (user_id, created_at) VALUES (:user_id, NOW())");
         $stmt->execute([':user_id' => $user_id]);
         return $this->conn->lastInsertId();
-    }
-
-    // Lấy giỏ hàng đang mở (status = 0) của user
-    public function getOpenCartByUser($user_id)
-    {
-        $stmt = $this->conn->prepare("SELECT * FROM cart WHERE user_id = :user_id AND status = 0 LIMIT 1");
-        $stmt->execute([':user_id' => $user_id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     // Lấy giỏ hàng theo ID
@@ -51,28 +41,6 @@ class Cart
     {
         $stmt = $this->conn->prepare("DELETE FROM cart WHERE cart_id = :cart_id");
         return $stmt->execute([':cart_id' => $cart_id]);
-    }
-
-    // Cập nhật tổng tiền cho giỏ hàng
-    public function updateTotalAmount($cart_id)
-    {
-        $stmt = $this->conn->prepare("
-            SELECT SUM(quantity * item_price) as total 
-            FROM cart_details 
-            WHERE cart_id = :cart_id
-        ");
-        $stmt->execute([':cart_id' => $cart_id]);
-        $total = $stmt->fetchColumn();
-        if ($total === null) $total = 0;
-        $stmt = $this->conn->prepare("UPDATE cart SET total_amount = :total WHERE cart_id = :cart_id");
-        $stmt->execute([':total' => $total, ':cart_id' => $cart_id]);
-    }
-
-    // Đổi trạng thái giỏ hàng (ví dụ khi đặt hàng thành công)
-    public function checkout($cart_id)
-    {
-        $stmt = $this->conn->prepare("UPDATE cart SET status = 1 WHERE cart_id = :cart_id");
-        $stmt->execute([':cart_id' => $cart_id]);
     }
 
     // Lấy giỏ hàng kèm thông tin user

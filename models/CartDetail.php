@@ -61,4 +61,31 @@ class CartDetail {
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([':cart_detail_id' => $cart_detail_id]);
     }
+    public function addOrUpdateCartDetail($cart_id, $watch_id, $quantity, $item_price)
+    {
+        // Kiểm tra sản phẩm đã có trong giỏ chưa
+        $stmt = $this->conn->prepare("SELECT * FROM cart_details WHERE cart_id = :cart_id AND watch_id = :watch_id");
+        $stmt->execute([':cart_id' => $cart_id, ':watch_id' => $watch_id]);
+        $item = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($item) {
+            // Nếu đã có thì cập nhật số lượng
+            $stmt = $this->conn->prepare("UPDATE cart_details SET quantity = quantity + :quantity WHERE cart_detail_id = :cart_detail_id");
+            $stmt->execute([
+                ':quantity' => $quantity,
+                ':cart_detail_id' => $item['cart_detail_id']
+            ]);
+        } else {
+            // Nếu chưa có thì thêm mới
+            $stmt = $this->conn->prepare("INSERT INTO cart_details (cart_id, watch_id, quantity, item_price) VALUES (:cart_id, :watch_id, :quantity, :item_price)");
+            $stmt->execute([
+                ':cart_id'    => $cart_id,
+                ':watch_id'   => $watch_id,
+                ':quantity'   => $quantity,
+                ':item_price' => $item_price
+            ]);
+        }
+    }
 }
+
+
