@@ -1,21 +1,19 @@
 <?php
 session_start();
-require_once '../includes/db_connect.php';
+include '../models/User.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email    =$_POST['email'];
+    $email    = $_POST['email'];
     $password = $_POST['password'];
 
     try {
-        $pdo = Db_connect::getConnection();
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email");
-        $stmt->execute([':email' => $email]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $userModel = new User();
+        $user = $userModel->authenticate($email, $password);
 
         if ($user) {
             // Đăng nhập thành công
             $_SESSION['user'] = [
-                'id'      => $user['id'],
+                'id'      => $user['user_id'],
                 'name'    => $user['name'],
                 'email'   => $user['email'],
                 'role_id' => $user['role_id']

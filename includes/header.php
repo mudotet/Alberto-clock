@@ -71,58 +71,37 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
     <button class="btn-close" id="closeSidebar" aria-label="Close">X</button>
     <h4>Giỏ hàng của bạn</h4>
     <div id="cart-items">
-      <?php
-      if (isset($_SESSION['user'])) {
-          require_once '../models/Cart.php';
-          require_once '../models/CartDetail.php';
-          $cartModel = new Cart();
-          $cartDetailModel = new CartDetail();
-          $cart = $cartModel->getOpenCartByUser($_SESSION['user']['id']);
-          if ($cart) {
-              $items = $cartDetailModel->getDetailsByCartId($cart['cart_id']);
-              if ($items) {
-                  echo '<table class="table table-sm">';
-                  echo '<thead><tr><th>Sản phẩm</th><th>SL</th><th>Giá</th></tr></thead><tbody>';
-                  foreach ($items as $item) {
-                      echo '<tr>';
-                      echo '<td>' . htmlspecialchars($item['model']) . '</td>';
-                      echo '<td>' . (int)$item['quantity'] . '</td>';
-                      echo '<td>' . number_format($item['item_price'], 0, ',', '.') . ' VNĐ</td>';
-                      echo '</tr>';
-                  }
-                  echo '</tbody></table>';
-                  echo '<div class="fw-bold text-end">Tổng: ' . number_format($cart['total_amount'], 0, ',', '.') . ' VNĐ</div>';
-              } else {
-                  echo '<p>Giỏ hàng trống.</p>';
-              }
-          } else {
-              echo '<p>Giỏ hàng trống.</p>';
-          }
-      } else {
-          echo '<p>Bạn chưa đăng nhập.</p>';
-      }
-      ?>
+      <p>Chức năng giỏ hàng sẽ được cập nhật sau.</p>
     </div>
-    <button class="btn btn-primary">Xem chi tiết giỏ hàng</button>
+    <button class="btn btn-primary" disabled>Xem chi tiết giỏ hàng</button>
   </div>
 </div>
 
 <script>
-  // Mở Sidebar
-  document.getElementById('openSidebar').addEventListener('click', function() {
-    document.getElementById('cartSidebar').classList.add('show');
-    document.getElementById('sidebarOverlay').classList.add('show');
-  });
+  // Kiểm tra tồn tại phần tử trước khi gán sự kiện
+  const openSidebarBtn = document.getElementById('openSidebar');
+  const closeSidebarBtn = document.getElementById('closeSidebar');
+  const cartSidebar = document.getElementById('cartSidebar');
+  const sidebarOverlay = document.getElementById('sidebarOverlay');
 
-  // Đóng Sidebar khi nhấn vào dấu X
-  document.getElementById('closeSidebar').addEventListener('click', function() {
-    document.getElementById('cartSidebar').classList.remove('show');
-    document.getElementById('sidebarOverlay').classList.remove('show');
-  });
+  if (openSidebarBtn && cartSidebar && sidebarOverlay) {
+    openSidebarBtn.addEventListener('click', function() {
+      cartSidebar.classList.add('show');
+      sidebarOverlay.classList.add('show');
+    });
+  }
 
-  // Đóng Sidebar khi nhấn vào overlay
-  document.getElementById('sidebarOverlay').addEventListener('click', function() {
-    document.getElementById('cartSidebar').classList.remove('show');
-    document.getElementById('sidebarOverlay').classList.remove('show');
-  });
-</script>
+  if (closeSidebarBtn && cartSidebar && sidebarOverlay) {
+    closeSidebarBtn.addEventListener('click', function() {
+      cartSidebar.classList.remove('show');
+      sidebarOverlay.classList.remove('show');
+    });
+  }
+
+  if (sidebarOverlay && cartSidebar) {
+    sidebarOverlay.addEventListener('click', function() {
+      cartSidebar.classList.remove('show');
+      sidebarOverlay.classList.remove('show');
+    });
+  }
+</script> 

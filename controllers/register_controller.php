@@ -22,14 +22,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
 
-        // Hash password
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-        // Thêm user mới (user_id tự động tăng)
-        $stmt = $pdo->prepare("INSERT INTO users (email, password, role_id, name, phone_number, address, registration_date) VALUES (:email, :password, :role_id, :name, :phone_number, :address, :registration_date)");
+       $stmt = $pdo->prepare("INSERT INTO users (email, password, role_id, name, phone_number, address, registration_date) VALUES (:email, :password, :role_id, :name, :phone_number, :address, :registration_date)");
         $stmt->execute([
             ':email'             => $email,
-            ':password'          => $hashedPassword,
+            ':password'          => $password, 
             ':role_id'           => $role_id,
             ':name'              => $name,
             ':phone_number'      => $phone,

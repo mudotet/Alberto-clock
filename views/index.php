@@ -118,7 +118,7 @@ $totalPages = ceil($total / $limit);
             <?php
               $brandFolder = isset($watch['brand_name']) ? urlencode($watch['brand_name']) : 'default';
               $imagePath = !empty($watch['watches_images'])
-                ? "../assets/images/Ảnh đồng hồ/{$brandFolder}/" . htmlspecialchars($watch['watches_images'])
+                ? "../assets/" . htmlspecialchars($watch['watches_images'])
                 : "../assets/images/Ảnh đồng hồ/default.jpg";
             ?>
             <img src="<?= $imagePath ?>" alt="Đồng hồ" class="img-fluid mb-2" style="height: 220px; object-fit: contain;">
