@@ -1,18 +1,22 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   min-height: 100vh;
   margin: 0;
-  padding: 10px;
   background: linear-gradient(135deg, #f2c48c 0%, #804a06 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
 }
 
 .registration-container {
   width: 100%;
   max-width: 600px;
-  max-height: 95vh;
 }
 
 .card {
@@ -20,6 +24,8 @@ body {
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   background-color: #fff;
+  overflow-y: auto;
+  max-height: 95vh;
 }
 
 .card-body {
