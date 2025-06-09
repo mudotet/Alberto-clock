@@ -44,9 +44,7 @@ CREATE TABLE `brands` (
 CREATE TABLE `cart` (
   `cart_id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `status` enum('Pending','Completed','Cancelled') DEFAULT NULL,
   `created_at` datetime DEFAULT current_timestamp(),
-  `total_amount` decimal(10,2) DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
