@@ -1,132 +1,122 @@
-<<<<<<< HEAD
-<?php
-session_start();
-
-// Xử lý đăng nhập
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    
-    // Kiểm tra thông tin đăng nhập (đơn giản)
-    $valid_username = 'admin';
-    $valid_password = '123456';
-    
-    if ($username === $valid_username && $password === $valid_password) {
-        $_SESSION['loggedin'] = true;
-        $_SESSION['username'] = $username;
-        header('Location: welcome.php');
-        exit;
-    } else {
-        $error = "Tên đăng nhập hoặc mật khẩu không đúng!";
-    }
-}
-?>
-
-=======
->>>>>>> main
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-    <title>Login Form</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        :root {
+            --dark-brown: #924F0D;
+            --header-brown: #8D4A06;
+            --light-brown: #B27F54;
+            --black: #010500;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
-            background-color: hwb(240 96% 2% / 0.962);
+            background-color: var(--light-brown);
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
         }
-        .login-form {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
+        
+        .login-container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+        
+        .login-header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .login-title {
+            color: var(--dark-brown);
+            font-weight: 600;   
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-control {
+            padding: 0.75rem 1rem;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            border: 1px solid #ddd;
         }
-        .login-form h2 {
-            margin-bottom: 20px;
-            text-align: center;
+        
+        .form-control:focus {
+            border-color: var(--light-brown);
+            box-shadow: 0 0 0 0.25rem rgba(178, 127, 84, 0.25);
         }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .form-group button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
+        
+        .btn-brown {
+            background-color: var(--dark-brown);
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
+            color: white;
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
-        .form-group button:hover {
-            background-color: #001eb3;
+        
+        .btn-brown:hover {
+            background-color: var(--header-brown);
+            transform: translateY(-2px);
         }
-        .error {
-            color: red;
+        
+        .login-footer {
+            margin-top: 1.5rem;
             text-align: center;
-            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .link-brown {
+            color: var(--dark-brown);
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .link-brown:hover {
+            color: var(--header-brown);
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="login-form">
-        <h2>Đăng Nhập</h2>
-        
-        <?php if (isset($error)): ?>
-            <div class="error"><?php echo $error; ?></div>
-        <?php endif; ?>
-        
-        <form id="loginForm" method="POST" action="login.php">
-            <div class="form-group">
-                <label for="username">Tên đăng nhập:</label>
-                <input type="text" id="username" name="username" required>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-11 col-sm-10 col-md-8 col-lg-6">
+                <div class="login-container">
+                    <div class="login-header">
+                        <h2 class="login-title">Welcome Back</h2>
+                        <p class="text-muted">Please login to your account</p>
+                    </div>
+                    
+                    <form action="../controllers/login_controller.php" method="POST">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                        </div>
+                        <button type="submit" class="btn btn-brown w-100">Login</button>
+                    </form>
+                    
+                    <div class="login-footer">
+                        <p>Don't have an account? <a href="../views/register.php" class="link-brown">Register here</a></p>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="password">Mật khẩu:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div class="form-group">
-                <button type="submit">Đăng Nhập</button>
-            </div>
-        </form>
-=======
-    <title>Login</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container mt-5">
-        <h2 class="text-center">Login</h2>
-        <form action="../controllers/login_controller.php" method="POST" class="w-50 mx-auto">
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Login</button>
-        </form>
-        <p class="mt-3 text-center"><a href="../views/register.php">Don't have an account? Register here</a></p>
->>>>>>> main
+        </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
+</html> 
