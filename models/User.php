@@ -68,14 +68,15 @@ class User {
         return $stmt->execute([':user_id' => $user_id]);
     }
 
-    // AUTH - Kiểm tra đăng nhập
+        // AUTH - Kiểm tra đăng nhập
     public function authenticate($email, $password) {
         $sql = "SELECT * FROM users WHERE email = :email";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([':email' => $email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         
-        if ($user && password_verify($password, $user['password'])) {
+        // So sánh plain text
+        if ($user && $password === $user['password']) {
             return $user;
         }
         return false;
