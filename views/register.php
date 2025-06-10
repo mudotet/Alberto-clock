@@ -52,7 +52,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="card-body">
           <h3 class="card-title text-center mb-4">Đăng ký tài khoản</h3>
           <form method="post" action="register.php">
-
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="name" class="form-label">Họ tên</label>
@@ -63,7 +62,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="password" class="form-control" name="password" required>
               </div>
             </div>
-
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="email" class="form-label">Email</label>
@@ -74,7 +72,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="text" class="form-control" name="phone" required>
               </div>
             </div>
-
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="address" class="form-label">Địa chỉ</label>
@@ -85,7 +82,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="date" class="form-control" name="created_at" value="<?= date('Y-m-d') ?>" required>
               </div>
             </div>
-
             <button type="submit" class="btn btn-primary w-100">Đăng ký</button>
           </form>
         </div>
