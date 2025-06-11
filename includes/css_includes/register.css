@@ -1,18 +1,22 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   min-height: 100vh;
   margin: 0;
-  padding: 10px;
   background: linear-gradient(135deg, #f2c48c 0%, #804a06 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
 }
 
 .registration-container {
   width: 100%;
   max-width: 600px;
-  max-height: 95vh;
 }
 
 .card {
@@ -20,6 +24,8 @@ body {
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   background-color: #fff;
+  overflow-y: auto;
+  max-height: 95vh;
 }
 
 .card-body {
@@ -65,17 +71,6 @@ textarea.form-control {
   font-weight: 500;
   font-size: 0.9rem;
   margin-top: 0.5rem;
-}
-
-.text-center a {
-  color: #804a06;
-  text-decoration: underline;
-  font-weight: 500;
-  transition: color 0.2s;
-}
-.text-center a:hover {
-  color: #c97d2a;
-  text-decoration: none;
 }
 
 @media (max-width: 768px) {
