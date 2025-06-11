@@ -1,9 +1,10 @@
 .navbar.custom-navbar {
   background-color: #804a06 !important;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
 }
-
 .nav-link-custom {
-  color: white !important;
+  color: #fff !important;
   background: none !important;
   border: none !important;
   padding: 0.5rem 1rem;
@@ -13,95 +14,146 @@
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
+  transition: color 0.2s;
+  position: relative;
 }
-
 .nav-link-custom:hover,
 .nav-link-custom.active {
-  color: #ffc107 !important; /* Ví dụ màu vàng khi hover/active */
+  color: #ffc107 !important;
   text-decoration: underline;
-  background: none !important;
-  border: none !important;
 }
-
-/* Màu sắc và Styles cho Sidebar */
+.cart-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: #a86b1c;
+  color: #fff;
+  font-size: 0.8rem;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  font-weight: bold;
+  display: inline-block;
+  pointer-events: none;
+}
 .sidebar {
   position: fixed;
   top: 0;
-  right: -300px; /* Sidebar ẩn bên phải */
-  width: 300px;
-  height: 100%;
-  background-color: #924f0d; /* Nâu đậm */
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  right: 0;
+  height: 100vh;
+  width: 340px;
+  background: #fff;
+  box-shadow: -2px 0 16px rgba(0, 0, 0, 0.12);
   z-index: 1050;
-  transition: right 0.3s ease-in-out;
-  padding: 20px;
-  color: #fff;
+  transform: translateX(100%);
+  transition: transform 0.3s;
+  border-top-left-radius: 18px;
+  border-bottom-left-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  color: #212529;
 }
-
-.sidebar h4 {
-  color: #fff;
-  margin-top: 0;
+.sidebar.show {
+  transform: translateX(0);
 }
-
-#cart-items {
-  margin-bottom: 20px;
-}
-
-/* Sidebar content */
 .sidebar-content {
-  padding: 20px;
+  padding: 28px 22px 18px 22px;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  overflow-y: auto;
 }
-
+.sidebar-content h4 {
+  font-weight: bold;
+  margin-bottom: 18px;
+  color: #a86b1c;
+  letter-spacing: 0.5px;
+}
+.sidebar-cart-list {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  margin-bottom: 18px;
+}
+.sidebar-cart-list table {
+  width: 100%;
+  background: transparent;
+}
+.sidebar-cart-list td,
+.sidebar-cart-list th {
+  border: none;
+  padding: 8px 0;
+  vertical-align: middle;
+  text-align: center;
+}
+.sidebar-cart-list img {
+  border-radius: 8px;
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+.sidebar-total {
+  font-weight: bold;
+  color: #a86b1c;
+  margin-bottom: 12px;
+  text-align: right;
+}
 .sidebar .btn-close {
-  font-size: 24px;
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: #eee;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 1.2rem;
+  color: #a86b1c;
+  border: none;
+  transition: background 0.2s;
+  line-height: 32px;
+  text-align: center;
+}
+.sidebar .btn-close:hover {
+  background: #f5d7b7;
+}
+.sidebar .btn-cart-detail {
+  width: 100%;
+  background: #212529;
   color: #fff;
   border: none;
-  background: none;
-  cursor: pointer;
+  border-radius: 8px;
+  padding: 10px 0;
+  font-weight: 500;
+  margin-top: 6px;
+  font-size: 1rem;
+  transition: background 0.2s;
 }
-
-.sidebar .btn-close:hover {
-  color: #b27f54; /* Màu nâu nhạt */
+.sidebar .btn-cart-detail:hover {
+  background: #a86b1c;
+  color: #fff;
 }
-
-/* Overlay */
 .sidebar-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Màu đen mờ */
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
   z-index: 1040;
-  display: none; /* Ẩn ban đầu */
+  display: none;
 }
-
-/* Sidebar show effect */
-.sidebar.show {
-  right: 0; /* Sidebar trượt ra */
-}
-
 .sidebar-overlay.show {
-  display: block; /* Hiện overlay khi sidebar mở */
+  display: block;
 }
-
-/* Button to go to Checkout */
-.btn-primary {
-  background-color: #8d4a06; /* Màu header/footer */
-  border: none;
-}
-
-.btn-primary:hover {
-  background-color: #b27f54; /* Màu nâu nhạt */
-}
-
-/* Custom close button */
-.sidebar .btn-close {
-  background-color: transparent;
-  border: none;
-  color: white;
-  font-size: 25px;
-  cursor: pointer;
+@media (max-width: 991px) {
+  .sidebar {
+    width: 95vw;
+    min-width: 0;
+    border-radius: 0;
+  }
+  .navbar.custom-navbar {
+    border-radius: 0;
+  }
 }

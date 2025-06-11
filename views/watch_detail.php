@@ -56,7 +56,7 @@ if (!$watchDetail) {
           <li class="list-group-item"><strong>Số lượng còn:</strong> <?= $watchDetail['store_quantity'] ?></li>
           <li class="list-group-item"><strong>Ngày nhập:</strong> <?= date('d/m/Y', strtotime($watchDetail['purchase_date'])) ?></li>
         </ul>
-        <form method="post" action="../controllers/add_to_cart.php" class="d-inline">
+        <form id="addToCartForm" method="post" action="../controllers/add_to_cart.php" class="d-inline">
           <input type="hidden" name="watch_id" value="<?= $watchDetail['watch_id'] ?>">
           <input type="hidden" name="quantity" value="1">
           <button type="submit" class="btn btn-outline-secondary me-2">
@@ -98,6 +98,43 @@ if (!$watchDetail) {
     </div>
   </div>
   <?php include '../includes/footer.php'; ?>
+  <script>
+    document.getElementById('addToCartForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var form = this;
+        var formData = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                // Hiển thị sidebar và cập nhật bảng giỏ hàng
+                updateCartSidebar(data.items);
+                document.getElementById('cartSidebar').classList.add('show');
+                document.getElementById('sidebarOverlay').classList.add('show');
+            } else {
+                alert(data.error || 'Có lỗi xảy ra!');
+            }
+        });
+    });
+
+    function updateCartSidebar(items) {
+        let html = '<table class="table table-sm align-middle mb-2"><thead><tr><th>Ảnh</th><th>Số lượng</th></tr></thead><tbody>';
+        items.forEach(item => {
+            html += `<tr>
+                <td><img src="../assets/${item.watches_images}" style="width:50px;height:50px;object-fit:cover"></td>
+                <td>${item.quantity}</td>
+            </tr>`;
+        });
+        html += '</tbody></table>';
+        document.getElementById('cart-items').innerHTML = html;
+        // Bật nút xem chi tiết nếu có sản phẩm
+        document.querySelector('#cartSidebar button[type="submit"]').disabled = items.length === 0;
+    }
+  </script>
 </body>
 
 </html>
