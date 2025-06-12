@@ -1,66 +1,74 @@
-# ALBERTO CLOCK
+# 🕒 ALBERTO CLOCK
 
-## Mô tả dự án
+## 📝 Giới thiệu
 
-Dự án **ALBERTO CLOCK** là một trang web bán đồng hồ online, cho phép người dùng duyệt các mẫu đồng hồ, thêm chúng vào giỏ hàng và thanh toán online. Dự án cũng bao gồm một khu vực quản trị để quản lý sản phẩm và đơn hàng.
+**ALBERTO CLOCK** là một trang web thương mại điện tử chuyên bán đồng hồ, mang đến trải nghiệm duyệt sản phẩm, thêm vào giỏ hàng và thanh toán trực tuyến. Dự án cũng có khu vực quản trị dành cho quản trị viên để quản lý sản phẩm và đơn hàng.
 
-## Cấu trúc thư mục
+---
 
-Cấu trúc thư mục của dự án được tổ chức theo mô hình **MVC (Model-View-Controller)** đơn giản giúp tách biệt các thành phần của ứng dụng, dễ dàng quản lý và bảo trì mã nguồn. Dưới đây là mô tả chi tiết về từng thư mục và mục đích sử dụng của chúng.
+## 📁 Cấu trúc Dự án (MVC)
 
-### Mô tả chi tiết các thư mục:
+Dự án được tổ chức theo mô hình **MVC (Model - View - Controller)** để phân tách rõ ràng giữa dữ liệu, giao diện và logic xử lý.
 
-#### **`assets/`**:
+### 1. `assets/` – Tài nguyên giao diện
 
-- **`css/`**: Chứa các file CSS để định dạng giao diện trang web. Ví dụ: **`style.css`** là file CSS chính.
-- **`js/`**: Chứa các file JavaScript, bao gồm các thư viện như **`bootstrap.min.js`** và các script tùy chỉnh như **`main.js`**.
-- **`images/`**: Chứa các hình ảnh của sản phẩm và các hình ảnh chung của trang web, như logo và banner.
+- `css/`: File CSS chính (ví dụ: `style.css`)
+- `js/`: File JavaScript và thư viện (ví dụ: `main.js`, `bootstrap.min.js`)
+- `images/`: Hình ảnh sản phẩm, logo, banner...
 
-#### **`includes/`**:
+### 2. `includes/` – Thành phần dùng chung
 
-- **`header.php`**: Chứa phần đầu trang của website, bao gồm **menu**, **logo**, và các thẻ meta.
-- **`footer.php`**: Chứa phần chân trang của website, bao gồm **thông tin liên hệ**, **copyright**.
-- **`db_connect.php`**: Chứa logic kết nối đến cơ sở dữ liệu, giúp các file khác dễ dàng kết nối với cơ sở dữ liệu.
-- **`functions.php`**: Chứa các hàm PHP tái sử dụng như xử lý dữ liệu, thêm/sửa/xóa thông tin trong cơ sở dữ liệu.
+- `header.php`: Giao diện đầu trang (menu, logo, meta)
+- `footer.php`: Chân trang (thông tin liên hệ, bản quyền)
+- `db_connect.php`: Kết nối cơ sở dữ liệu
+- `functions.php`: Các hàm PHP tái sử dụng
 
-#### **`admin/`**:
+### 3. `admin/` – Giao diện Quản trị
 
-- **`index.php`**: Trang chính của admin, nơi quản trị viên có thể xem thống kê hoặc điều khiển tổng quan về website.
-- **`login.php`**: Trang đăng nhập cho quản trị viên.
-- **`products_manage.php`**: Quản lý sản phẩm (thêm, sửa, xóa các sản phẩm đồng hồ).
-- **`orders_manage.php`**: Quản lý đơn hàng (hiển thị và xử lý đơn hàng).
-- **`assets_admin/`**: Các file CSS/JS riêng biệt dành cho trang quản trị.
+- `index.php`: Trang chính cho quản trị viên
+- `login.php`: Trang đăng nhập quản trị
+- `products_manage.php`: Quản lý sản phẩm (thêm, sửa, xóa)
+- `orders_manage.php`: Quản lý đơn hàng
+- `assets_admin/`: Tài nguyên riêng cho giao diện quản trị
 
-#### **`models/`**:
+### 4. `models/` – Xử lý Dữ liệu (Model)
 
-- **`Brand.php`**: Chứa lớp PHP xử lý các thao tác với bảng **Brands** trong cơ sở dữ liệu.
-- **`Product.php`**: Chứa lớp PHP xử lý các thao tác với bảng **Watches**.
-- **`Cart.php`**: Chứa lớp PHP xử lý các thao tác với bảng **Cart** và **Cart_Details**.
-- **`User.php`**: Chứa lớp PHP xử lý các thao tác với bảng **Users**.
+- `Brand.php`: Quản lý bảng **Brands**
+- `Product.php`: Quản lý bảng **Watches**
+- `Cart.php`: Quản lý giỏ hàng và chi tiết
+- `User.php`: Quản lý người dùng
 
-#### **`controllers/`**:
+### 5. `controllers/` – Điều phối Dữ liệu (Controller)
 
-- **`ProductController.php`**: Điều khiển logic các trang sản phẩm (liệt kê, chi tiết sản phẩm).
-- **`CartController.php`**: Điều khiển các thao tác với giỏ hàng (thêm, xóa, tính toán tổng tiền giỏ hàng).
-- **`UserController.php`**: Điều khiển các thao tác với người dùng (đăng ký, đăng nhập).
+- `ProductController.php`: Hiển thị sản phẩm
+- `CartController.php`: Quản lý giỏ hàng
+- `UserController.php`: Đăng ký, đăng nhập người dùng
 
-#### **`views/`**:
+### 6. `views/` – Giao diện Người dùng (View)
 
-- **`index.php`**: Trang chủ của website, hiển thị các sản phẩm nổi bật hoặc thông tin chính về cửa hàng.
-- **`products.php`**: Trang danh sách sản phẩm.
-- **`product_detail.php`**: Trang chi tiết sản phẩm, hiển thị thông tin chi tiết về sản phẩm đồng hồ.
-- **`cart.php`**: Trang giỏ hàng, nơi người dùng có thể xem và điều chỉnh các sản phẩm trong giỏ.
-- **`checkout.php`**: Trang thanh toán, nơi người dùng hoàn tất đơn hàng.
-- **`login.php`**: Trang đăng nhập người dùng.
-- **`register.php`**: Trang đăng ký người dùng (đã thêm vào).
-- **`contact.php`**: Trang liên hệ, nơi người dùng có thể gửi câu hỏi hoặc yêu cầu.
+- `index.php`: Trang chủ
+- `products.php`: Danh sách sản phẩm
+- `product_detail.php`: Thông tin chi tiết sản phẩm
+- `cart.php`: Trang giỏ hàng
+- `checkout.php`: Trang thanh toán
+- `login.php`: Đăng nhập người dùng
+- `register.php`: Đăng ký người dùng
+- `contact.php`: Trang liên hệ
 
-#### **`process/`**:
+### 7. `process/` – Xử lý các hành động người dùng
 
-- **`process_cart.php`**: Xử lý các thao tác với giỏ hàng, chẳng hạn như thêm hoặc xóa sản phẩm.
-- **`process_login.php`**: Xử lý đăng nhập người dùng.
-- **`process_register.php`**: Xử lý đăng ký người dùng.
+- `process_cart.php`: Xử lý giỏ hàng
+- `process_login.php`: Xử lý đăng nhập
+- `process_register.php`: Xử lý đăng ký
 
-### Tóm tắt:
+---
 
-Cấu trúc thư mục này giúp bạn tổ chức dự án một cách dễ hiểu, dễ bảo trì, và dễ phát triển. Các thành viên trong nhóm sẽ dễ dàng hiểu được cách thức hoạt động của từng phần trong dự án và có thể đóng góp vào các phần khác nhau mà không gặp phải sự chồng chéo.
+## ✅ Lợi ích của cấu trúc này
+
+- **Rõ ràng**: Tách biệt từng phần giúp dễ hiểu và dễ mở rộng.
+- **Dễ bảo trì**: Có thể chỉnh sửa từng phần riêng mà không ảnh hưởng phần khác.
+- **Hợp tác hiệu quả**: Dễ dàng phân chia công việc giữa các thành viên trong nhóm.
+
+---
+
+
