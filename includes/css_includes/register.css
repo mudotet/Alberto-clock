@@ -6,7 +6,7 @@ body {
   min-height: 100vh;
   margin: 0;
   background: linear-gradient(135deg, #f2c48c 0%, #804a06 100%);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 
   display: flex;
   justify-content: center;
@@ -51,7 +51,8 @@ label {
   font-size: 0.9rem;
 }
 
-.form-control, .form-select {
+.form-control,
+.form-select {
   border: 1px solid #ced4da;
   padding: 8px 12px;
   border-radius: 6px;
