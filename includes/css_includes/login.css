@@ -6,7 +6,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .login-container {
@@ -53,13 +53,16 @@ label {
   height: calc(1.5em + 0.75rem + 2px);
 }
 
-.btn-primary {
-  background-color: #804a06;
-  border-color: #804a06;
-  padding: 8px;
+.btn-login {
+  background: #8d4a06;
+  color: #fff;
   font-weight: 500;
-  font-size: 0.9rem;
-  margin-top: 0.5rem;
+  border-radius: 8px;
+  transition: background 0.18s;
+}
+.btn-login:hover {
+  background: #a86b1c;
+  color: #fff;
 }
 
 .text-center a {

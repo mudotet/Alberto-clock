@@ -1,0 +1,113 @@
+.brand-filter .btn-brand {
+  color: #fff;
+  background-color: #8d4a06;
+  border: none;
+  font-weight: 500;
+  border-radius: 24px;
+  padding: 8px 22px 8px 14px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.08rem;
+  box-shadow: 0 2px 8px rgba(141, 74, 6, 0.06);
+  transition: background 0.18s, transform 0.18s;
+}
+.brand-filter .btn-brand .brand-logo {
+  height: 24px;
+  width: auto;
+  margin-right: 8px;
+  border-radius: 6px;
+  background: #fff;
+  padding: 2px 4px;
+  box-shadow: 0 1px 4px rgba(141, 74, 6, 0.08);
+  transition: transform 0.15s;
+}
+.brand-filter .btn-brand.active,
+.brand-filter .btn-brand:hover {
+  background-color: #a86b1c;
+  color: #fff;
+  transform: translateY(-2px) scale(1.04);
+}
+.brand-filter .btn-brand.active .brand-logo,
+.brand-filter .btn-brand:hover .brand-logo {
+  transform: scale(1.12);
+}
+
+.watch-card {
+  border: 1px solid #b27f54;
+  border-radius: 18px;
+  background: #fff;
+  padding: 18px 10px 14px 10px;
+  transition: box-shadow 0.2s, transform 0.2s;
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.watch-card:hover {
+  box-shadow: 0 6px 24px rgba(146, 79, 13, 0.18);
+  transform: translateY(-4px) scale(1.03);
+  border-color: #a86b1c;
+}
+.watch-img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background: #f8f8f8;
+}
+.watch-info {
+  width: 100%;
+}
+.watch-title {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #010500;
+  min-height: 48px;
+  margin-bottom: 6px;
+}
+.watch-price {
+  font-weight: bold;
+  color: #924f0d;
+  font-size: 1.13rem;
+  margin-bottom: 0;
+}
+
+.pagination .page-link {
+  color: #8d4a06;
+  background-color: #fff;
+  border: 1px solid #a86b1c;
+  font-weight: 500;
+  transition: background 0.18s, color 0.18s, border 0.18s;
+}
+.pagination .page-link:hover {
+  background-color: #a86b1c;
+  color: #fff;
+  border-color: #a86b1c;
+}
+.pagination .page-item.active .page-link {
+  background-color: #8d4a06;
+  color: #fff;
+  border-color: #8d4a06;
+}
+.pagination .page-item.disabled .page-link {
+  color: #ccc;
+  background-color: #f8f8f8;
+  border-color: #eee;
+}
+@media (max-width: 767px) {
+  .watch-card {
+    min-height: 280px;
+    padding: 12px 4px;
+  }
+  .watch-img {
+    height: 120px;
+  }
+  .brand-filter .btn-brand {
+    font-size: 0.97rem;
+    padding: 7px 10px 7px 7px;
+  }
+  .brand-filter .btn-brand .brand-logo {
+    height: 18px;
+  }
+}
