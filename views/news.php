@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../assets/css/news.css">
+    <link rel="stylesheet" href="../includes/css_includes/footer.css">
+    <link rel="stylesheet" href="../includes/css_includes/header.css">
 </head>
 <body>
     <!-- Include Header -->
