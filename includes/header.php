@@ -14,15 +14,11 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
       </button>
 
       <div class="collapse navbar-collapse" id="mainNavbar">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link-custom active" href="../views/index.php">Home</a>
           </li>
-          <?php if ($user && $user['role_id'] == 1): ?>
-            <li class="nav-item"><a class="nav-link-custom" href="../views/user_curd.php">Quản lý người dùng</a></li>
-            <li class="nav-item"><a class="nav-link-custom" href="../views/cart_curd.php">Quản lý giỏ hàng</a></li>
-            <li class="nav-item"><a class="nav-link-custom" href="../views/watch_curd.php">Quản lý đồng hồ</a></li>
-          <?php else: ?>
+          <?php if ($user): ?>
             <li class="nav-item"><a class="nav-link-custom" href="../views/news.php">News</a></li>
             <li class="nav-item"><a class="nav-link-custom" href="../views/about_us.php">About us</a></li>
           <?php endif; ?>
@@ -34,8 +30,7 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
           </a>
           <?php if ($user): ?>
             <span class="fw-semibold text-white">
-              Xin chào,
-              <?= $user['role_id'] == 1 ? "Admin" : htmlspecialchars($user['name']) ?>
+              Xin chào, <?= htmlspecialchars($user['name']) ?>
             </span>
             <a href="../controllers/logout.php" class="nav-link-custom">Logout</a>
           <?php else: ?>
