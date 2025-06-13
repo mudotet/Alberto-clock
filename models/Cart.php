@@ -42,19 +42,24 @@ class Cart
         $stmt = $this->conn->prepare("DELETE FROM cart WHERE cart_id = :cart_id");
         return $stmt->execute([':cart_id' => $cart_id]);
     }
-
-    // Lấy giỏ hàng kèm thông tin user
-    public function getCartWithUser($cart_id)
+        
+    // Lấy danh sách sản phẩm trong giỏ hàng của user, gồm ảnh và số lượng
+    public function getCartItemsWithImageAndQuantity($user_id)
     {
-        $stmt = $this->conn->prepare("
-            SELECT 
-                c.*, 
-                u.user_id, u.name AS user_name, u.email, u.phone_number
-            FROM cart c
-            JOIN users u ON c.user_id = u.user_id
-            WHERE c.cart_id = :cart_id
-        ");
-        $stmt->execute([':cart_id' => $cart_id]);
+        $sql = "SELECT w.watches_images, cd.quantity
+                FROM cart c
+                JOIN cart_details cd ON c.cart_id = cd.cart_id
+                JOIN watches w ON cd.watch_id = w.watch_id
+                WHERE c.user_id = :user_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([':user_id' => $user_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+        // Lấy giỏ hàng theo user_id
+    public function getCartByUserId($user_id)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM cart WHERE user_id = :user_id");
+        $stmt->execute([':user_id' => $user_id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }

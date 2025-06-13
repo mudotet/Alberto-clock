@@ -1,12 +1,64 @@
-footer {
-  background-color: 8D4A06;
+.alberto-footer {
+  background: #8d4a06;
   color: #fff;
-  padding: 20px 0;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  margin-top: 40px;
 }
-footer a {
+.alberto-footer a {
   color: #fff;
-  margin-right: 10px;
+  text-decoration: none;
+  transition: color 0.2s;
 }
-footer a:hover {
-  color: #ddd;
+.alberto-footer a:hover {
+  color: #ffc107;
+  text-decoration: underline;
+}
+.footer-social a {
+  display: inline-block;
+  margin: 0 8px;
+  font-size: 1.3rem;
+  color: #fff;
+  background: #a86b1c;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  transition: background 0.2s, color 0.2s;
+}
+.footer-social a:hover {
+  background: #fff;
+  color: #a86b1c;
+}
+.footer-links {
+  margin-bottom: 8px;
+}
+.footer-links a {
+  margin: 0 10px;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #fff;
+}
+.footer-links a:hover {
+  color: #ffc107;
+}
+@media (max-width: 767px) {
+  .alberto-footer {
+    font-size: 0.97rem;
+    border-radius: 0;
+  }
+  .footer-links a {
+    margin: 0 6px;
+    font-size: 0.97rem;
+  }
+  .footer-social a {
+    margin: 0 4px;
+    font-size: 1.1rem;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+  }
 }

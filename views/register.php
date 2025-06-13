@@ -9,7 +9,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $address    = $_POST["address"];
     $created_at = $_POST["created_at"];
 
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     try {
         $pdo = Db_connect::getConnection();
@@ -20,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
             ':email'      => $email,
-            ':password'   => $hashed_password,
+            ':password'   => $password,
             ':name'       => $name,
             ':phone'      => $phone,
             ':address'    => $address,
@@ -83,6 +82,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               </div>
             </div>
             <button type="submit" class="btn btn-primary w-100">Đăng ký</button>
+            <div class="text-center mt-3">
+                    <span>Bạn đã có tài khoản!</span>
+                    <a style = 'color: #804a06; font-weight: 500;' href="../views/login.php" class="ms-1">Đăng Nhập</a>
+            </div>
           </form>
         </div>
       </div>
