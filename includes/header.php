@@ -24,9 +24,6 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
             <li class="nav-item">
               <a class="nav-link-custom" href="../views/cart_curd.php">Quản lý giỏ hàng</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link-custom" href="../views/watch_curd.php">Quản lý đồng hồ</a>
-            </li>
           <?php else: ?>
             <li class="nav-item">
               <a class="nav-link-custom" href="../views/news.php">News</a>
