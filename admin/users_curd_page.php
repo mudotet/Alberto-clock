@@ -46,7 +46,7 @@ $roles = $roleModel->getAllRoles();
 </head>
 <body>
 
-<?php include './header.php'; ?>
+<?php include './admin_header.php'; ?>
 
 <div class="container my-5">
   <!-- FORM THÊM NGƯỜI DÙNG -->
