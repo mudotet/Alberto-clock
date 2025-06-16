@@ -1,5 +1,11 @@
 <?php
-require_once '../includes/db_connect.php';
+session_start();
+if (!isset($_SESSION['user']) || $_SESSION['user']['role_id'] != 1) {
+    // Nếu không phải admin, chuyển về trang login
+    header("Location: ../views/login.php");
+    exit();
+}
+
 require_once '../models/User.php';
 require_once '../models/Role.php';
 
@@ -21,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($_POST['action'] === 'delete') {
         $userModel->deleteUser($_POST['user_id']);
     }
-    header('Location: users_crud_page.php');
+    header('Location: users_curd_page.php');
     exit();
 }
 
@@ -35,14 +41,6 @@ $roles = $roleModel->getAllRoles();
   <meta charset="UTF-8">
   <title>Quản lý người dùng</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <style>
-    body { background-color: #f9f9f9; font-family: Arial; }
-    .admin-box { background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.08); }
-    h2 { color: #8B4000; margin-bottom: 20px; }
-    table th { background-color: #8B4000; color: white; }
-    .btn-orange { background-color: #8B4000; color: white; }
-    .btn-orange:hover { background-color: #a35400; }
-  </style>
 </head>
 <body>
 

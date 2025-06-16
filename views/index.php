@@ -22,76 +22,7 @@ $totalPages = ceil($total / $limit);
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../includes/css_includes/footer.css">
   <link rel="stylesheet" href="../includes/css_includes/header.css">
-  <style>
-    .watch-card img {
-      width: 100%;
-      height: 240px;
-      object-fit: contain;
-      margin-bottom: 8px;
-    }
-    .watch-card {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .watch-title {
-      font-size: 0.95rem;
-      min-height: 50px;
-    }
-    .watch-price {
-      font-weight: bold;
-      color: #d10000;
-      font-size: 1.1rem;
-    }
-      .btn-brand {
-    color: #fff;
-    background-color: #8D4A06;
-    border: none;
-  }
-
-  .btn-brand:hover,
-  .btn-brand.active {
-    background-color: #924F0D;
-  }
-
-  .watch-title {
-    font-weight: 500;
-    color: #010500;
-  }
-
-  .watch-price {
-    font-weight: bold;
-    color: #924F0D;
-  }
-
-  .watch-card {
-    border: 1px solid #B27F54;
-    padding: 15px;
-    margin-bottom: 25px;
-    background-color: #fff;
-    transition: transform 0.2s ease;
-  }
-
-  .watch-card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 0 10px rgba(146, 79, 13, 0.3);
-  }
-
-  .pagination .page-link {
-    color: #924F0D;
-    border-color: #B27F54;
-  }
-
-  .pagination .page-item.active .page-link {
-    background-color: #924F0D;
-    color: #fff;
-    border-color: #924F0D;
-  }
-
-  .pagination .page-link:hover {
-    background-color: #B27F54;
-    color: #fff;
-  }
-  </style>
+  <link rel="stylesheet" href="../includes/css_includes/index.css">
 </head>
 <body>
 <?php include '../includes/header.php'; ?>
@@ -100,7 +31,9 @@ $totalPages = ceil($total / $limit);
 
 <!-- Nội dung chính -->
 <div class="container my-5">
-  <h2 class="text-center mb-4 text-uppercase fw-bold" style="color: #924F0D;">Đồng hồ nam bán chạy</h2>
+  <h2 class="text-center mb-4 text-uppercase fw-bold" style="color: #924F0D; letter-spacing:1px;">
+  Đồng hồ nam bán chạy
+</h2>
 
   <!-- Bộ lọc thương hiệu -->
   <div class="text-center mb-4">
@@ -112,18 +45,19 @@ $totalPages = ceil($total / $limit);
   <!-- Danh sách đồng hồ -->
   <div class="row">
     <?php foreach ($watches as $watch): ?>
-      <div class="col-6 col-md-4 col-lg-3">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
         <a href="watch_detail.php?id=<?= $watch['watch_id'] ?>" class="text-decoration-none">
-          <div class="watch-card text-center">
+          <div class="watch-card shadow-sm h-100">
             <?php
-              $brandFolder = isset($watch['brand_name']) ? urlencode($watch['brand_name']) : 'default';
               $imagePath = !empty($watch['watches_images'])
                 ? "../assets/images/Ảnh đồng hồ/{$brandFolder}/" . htmlspecialchars($watch['watches_images'])
                 : "../assets/images/Ảnh đồng hồ/default.jpg";
             ?>
-            <img src="<?= $imagePath ?>" alt="Đồng hồ" class="img-fluid mb-2" style="height: 220px; object-fit: contain;">
-            <p class="watch-title"><?= htmlspecialchars($watch['model']) ?></p>
-            <p class="watch-price"><?= number_format($watch['price'], 0, ',', '.') ?> đ</p>
+            <img src="<?= $imagePath ?>" alt="Đồng hồ" class="img-fluid mb-2 watch-img">
+            <div class="watch-info">
+              <p class="watch-title"><?= htmlspecialchars($watch['model']) ?></p>
+              <p class="watch-price"><?= number_format($watch['price'], 0, ',', '.') ?> đ</p>
+            </div>
           </div>
         </a>
       </div>

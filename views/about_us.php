@@ -1,3 +1,6 @@
+<?php
+    include_once '../includes/header.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +11,7 @@
             integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" 
             crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/about_us.css">
+    <link rel="stylesheet" href="../includes/css_includes/about_us.css">
     <link rel="stylesheet" href="../includes/css_includes/header.css">
     <link rel="stylesheet" href="../includes/css_includes/footer.css">
     <title>About Us - Alberto Clock</title>

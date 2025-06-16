@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Kiểm tra nếu là admin, chuyển hướng đến trang quản trị admin
             if ($user['role_id'] == 1) { // Giả sử 'role_id' = 1 là admin
-                header("Location: ../admin/users_curd_page.php"); // Đảm bảo đường dẫn đúng
+                header("Location: ../admin/watches_curd_page.php"); // Đảm bảo đường dẫn đúng
             } else {
                 header("Location: ../views/index.php"); // Nếu không phải admin, chuyển đến trang chính
             }
