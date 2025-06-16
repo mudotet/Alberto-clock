@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             'role_id' => $user['role_id']
         ];
         if ($user['role_id'] == 1) {
-            header("Location:../views/users_curd_page.php");
+            header("Location: ../admin/users_curd_page.php");
         } else {
             header("Location: ../views/index.php");
         }
