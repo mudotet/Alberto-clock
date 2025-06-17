@@ -58,7 +58,7 @@ $watches = $watchModel->getAllWatches();
     <title>Quản lý đồng hồ</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+    <link rel="stylesheet" href="../includes/css_includes/footer.css">
     <style>
         body { background: #f6f6f6; font-family: 'Segoe UI', Arial, sans-serif; }
         .main-title { color: #8B4000; text-align: center; margin: 40px 0 24px 0; font-weight: bold; }

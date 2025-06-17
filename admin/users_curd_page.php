@@ -35,6 +35,7 @@ $roles = $roleModel->getAllRoles();
   <meta charset="UTF-8">
   <title>Quản lý người dùng</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../includes/css_includes/footer.css">
   <style>
     body { background-color: #f9f9f9; font-family: Arial; }
     .admin-box { background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.08); }
