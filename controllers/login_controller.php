@@ -11,20 +11,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = $userModel->authenticate($email, $password);
 
         if ($user) {
-            // Đăng nhập thành công, lưu thông tin người dùng vào session
+            // Đăng nhập thành công
             $_SESSION['user'] = [
                 'id'      => $user['user_id'],
                 'name'    => $user['name'],
                 'email'   => $user['email'],
                 'role_id' => $user['role_id']
             ];
-
-            // Kiểm tra nếu là admin, chuyển hướng đến trang quản trị admin
-            if ($user['role_id'] == 1) { // Giả sử 'role_id' = 1 là admin
-                header("Location: ../admin/watches_curd_page.php"); // Đảm bảo đường dẫn đúng
-            } else {
-                header("Location: ../views/index.php"); // Nếu không phải admin, chuyển đến trang chính
-            }
+            header("Location: ../views/index.php");
             exit();
         } else {
             // Sai thông tin đăng nhập
