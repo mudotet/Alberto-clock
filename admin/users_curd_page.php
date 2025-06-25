@@ -34,6 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         'phone_number' => $_POST['phone_number'],
                         'address' => $_POST['address']
                     ];
+                    // Chỉ thêm mật khẩu vào updateData nếu người dùng nhập mật khẩu mới
+                    if (!empty($_POST['password'])) {
+                        $updateData['password'] = $_POST['password'];
+                    }
                     $userModel->updateUser($_POST['user_id'], $updateData);
                 }
                 break;
@@ -78,7 +82,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'edit' && isset($_GET['user_id
     <form method="POST" class="row g-3">
       <input type="hidden" name="action" value="<?= $userToEdit ? 'update' : 'add' ?>">
       <?php if ($userToEdit): ?>
-        <input type="hidden" name="user_id" value="<?= $userToEdit['user_id'] ?>">
+        <input type="hidden" name="user_id" value="<?= htmlspecialchars($userToEdit['user_id']) ?>">
       <?php endif; ?>
 
       <div class="col-md-4">
