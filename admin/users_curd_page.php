@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($_POST['action'] === 'delete') {
         $userModel->deleteUser($_POST['user_id']);
     }
-    header('Location: users_crud_page.php');
+    header('Location: users_curd_page.php');
     exit();
 }
 
