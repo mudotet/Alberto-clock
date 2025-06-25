@@ -104,10 +104,12 @@ if (isset($_GET['action']) && $_GET['action'] === 'edit' && isset($_GET['user_id
                     <?= ($userToEdit && $userToEdit['role_id'] == $role['role_id']) ? 'selected' : '' ?>>
               <?= htmlspecialchars($role['role_name']) ?>
             </option>
+
           <?php endforeach; ?>
         </select>
       </div>
       <div class="col-md-4">
+
         <label for="name" class="form-label">Họ tên</label>
         <input type="text" class="form-control" id="name" name="name" value="<?= htmlspecialchars($userToEdit['name'] ?? '') ?>">
       </div>
@@ -130,6 +132,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'edit' && isset($_GET['user_id
     </form>
   </div>
 
+
   <div class="admin-box mt-5">
     <h2>Danh sách người dùng</h2>
     <table class="table table-bordered table-hover">
@@ -142,12 +145,15 @@ if (isset($_GET['action']) && $_GET['action'] === 'edit' && isset($_GET['user_id
           <th>SĐT</th>
           <th>Địa chỉ</th>
           <th>Ngày tạo</th>
+
           <th colspan="2">Thao tác</th>
+
         </tr>
       </thead>
       <tbody>
         <?php foreach ($users as $u): ?>
           <tr>
+
             <td><?= htmlspecialchars($u['user_id']) ?></td>
             <td><?= htmlspecialchars($u['email']) ?></td>
             <td><?= htmlspecialchars($u['name']) ?></td>
@@ -163,6 +169,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'edit' && isset($_GET['user_id
                 <input type="hidden" name="action" value="delete">
                 <input type="hidden" name="user_id" value="<?= htmlspecialchars($u['user_id']) ?>">
                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xoá người dùng này không?')">Xoá</button>
+
               </form>
             </td>
           </tr>
@@ -175,4 +182,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'edit' && isset($_GET['user_id
 <?php include '../includes/footer.php'; ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
+

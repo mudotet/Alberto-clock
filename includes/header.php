@@ -16,15 +16,11 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
       <div class="collapse navbar-collapse" id="mainNavbar">
              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link-custom active" href="../views/index.php">Home</a>
+            <a class="nav-link-custom active" href="../views/index.php">Trang Chủ</a>
           </li>
-          <?php if ($user && $user['role_id'] == 1): ?>
-            <li class="nav-item"><a class="nav-link-custom" href="../views/user_curd.php">Quản lý người dùng</a></li>
-            <li class="nav-item"><a class="nav-link-custom" href="../views/cart_curd.php">Quản lý giỏ hàng</a></li>
-            <li class="nav-item"><a class="nav-link-custom" href="../views/watch_curd.php">Quản lý đồng hồ</a></li>
-          <?php else: ?>
-            <li class="nav-item"><a class="nav-link-custom" href="../views/news.php">News</a></li>
-            <li class="nav-item"><a class="nav-link-custom" href="../views/about_us.php">About us</a></li>
+          <?php if ($user): ?>
+            <li class="nav-item"><a class="nav-link-custom" href="../views/news.php">Tin Tức</a></li>
+            <li class="nav-item"><a class="nav-link-custom" href="../views/about_us.php">Về Chúng Tôi</a></li>
           <?php endif; ?>
         </ul>
         <div class="d-flex align-items-center gap-3">
@@ -36,9 +32,9 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
             <span class="fw-semibold text-white">
               Xin chào, <?= htmlspecialchars($user['name']) ?>
             </span>
-            <a href="../controllers/logout.php" class="nav-link-custom">Logout</a>
+            <a href="../controllers/logout.php" class="nav-link-custom">Đăng Xuất</a>
           <?php else: ?>
-            <a href="../views/login.php" class="nav-link-custom">Login</a>
+            <a href="../views/login.php" class="nav-link-custom">Đăng Nhập</a>
           <?php endif; ?>
         </div>
       </div>
