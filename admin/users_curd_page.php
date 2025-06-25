@@ -1,38 +1,55 @@
 <?php
-session_start();
-if (!isset($_SESSION['user']) || $_SESSION['user']['role_id'] != 1) {
-    // Nếu không phải admin, chuyển về trang login
-    header("Location: ../views/login.php");
-    exit();
-}
-
+require_once '../includes/db_connect.php';
 require_once '../models/User.php';
 require_once '../models/Role.php';
 
 $userModel = new User();
 $roleModel = new Role();
 
-// Xử lý POST thêm hoặc xoá user
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if ($_POST['action'] === 'add') {
-        $userModel->createUser([
-            'email' => $_POST['email'],
-            'password' => $_POST['password'],
-            'role_id' => $_POST['role_id'],
-            'name' => $_POST['name'],
-            'phone_number' => $_POST['phone_number'],
-            'address' => $_POST['address'],
-            'registration_date' => date('Y-m-d H:i:s')
-        ]);
-    } elseif ($_POST['action'] === 'delete') {
-        $userModel->deleteUser($_POST['user_id']);
+    if (isset($_POST['action'])) {
+        switch ($_POST['action']) {
+            case 'add':
+                $userModel->createUser([
+                    'email' => $_POST['email'],
+                    'password' => $_POST['password'],
+                    'role_id' => $_POST['role_id'],
+                    'name' => $_POST['name'],
+                    'phone_number' => $_POST['phone_number'],
+                    'address' => $_POST['address'],
+                    'registration_date' => date('Y-m-d H:i:s')
+                ]);
+                break;
+            case 'delete':
+                if (isset($_POST['user_id'])) {
+                    $userModel->deleteUser($_POST['user_id']);
+                }
+                break;
+            case 'update':
+                if (isset($_POST['user_id'])) {
+                    $updateData = [
+                        'email' => $_POST['email'],
+                        'role_id' => $_POST['role_id'],
+                        'name' => $_POST['name'],
+                        'phone_number' => $_POST['phone_number'],
+                        'address' => $_POST['address']
+                    ];
+                    $userModel->updateUser($_POST['user_id'], $updateData);
+                }
+                break;
+        }
     }
-    header('Location: users_curd_page.php');
+    header('Location: users_crud_page.php');
     exit();
 }
 
 $users = $userModel->getAllUsers();
 $roles = $roleModel->getAllRoles();
+
+$userToEdit = null;
+if (isset($_GET['action']) && $_GET['action'] === 'edit' && isset($_GET['user_id'])) {
+    $userToEdit = $userModel->getUserById($_GET['user_id']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -41,52 +58,74 @@ $roles = $roleModel->getAllRoles();
   <meta charset="UTF-8">
   <title>Quản lý người dùng</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../includes/css_includes/footer.css">
+  <style>
+    body { background-color: #f9f9f9; font-family: Arial; }
+    .admin-box { background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.08); }
+    h2 { color: #8B4000; margin-bottom: 20px; }
+    table th { background-color: #8B4000; color: white; }
+    .btn-orange { background-color: #8B4000; color: white; }
+    .btn-orange:hover { background-color: #a35400; }
+  </style>
 </head>
 <body>
 
-<?php include 'admin_header.php'; ?>
+<?php include './admin_header.php'; ?>
 
 <div class="container my-5">
-  <!-- FORM THÊM NGƯỜI DÙNG -->
   <div class="admin-box">
-    <h2>Thêm người dùng</h2>
+    <h2><?= $userToEdit ? 'Sửa người dùng' : 'Thêm người dùng mới' ?></h2>
     <form method="POST" class="row g-3">
-      <input type="hidden" name="action" value="add">
+      <input type="hidden" name="action" value="<?= $userToEdit ? 'update' : 'add' ?>">
+      <?php if ($userToEdit): ?>
+        <input type="hidden" name="user_id" value="<?= $userToEdit['user_id'] ?>">
+      <?php endif; ?>
+
       <div class="col-md-4">
-        <label>Email</label>
-        <input type="email" name="email" class="form-control" required>
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" value="<?= htmlspecialchars($userToEdit['email'] ?? '') ?>" required>
       </div>
       <div class="col-md-4">
-        <label>Mật khẩu</label>
-        <input type="password" name="password" class="form-control" required>
+        <label for="password" class="form-label">Mật khẩu</label>
+        <input type="password" class="form-control" id="password" name="password" <?= $userToEdit ? '' : 'required' ?>>
+        <?php if ($userToEdit): ?>
+          <small class="form-text text-muted">Bỏ trống nếu không muốn thay đổi mật khẩu.</small>
+        <?php endif; ?>
       </div>
       <div class="col-md-4">
-        <label>Vai trò</label>
-        <select name="role_id" class="form-select">
+        <label for="role_id" class="form-label">Vai trò</label>
+        <select class="form-select" id="role_id" name="role_id">
           <?php foreach ($roles as $role): ?>
-            <option value="<?= $role['role_id'] ?>"><?= $role['role_name'] ?></option>
+            <option value="<?= htmlspecialchars($role['role_id']) ?>"
+                    <?= ($userToEdit && $userToEdit['role_id'] == $role['role_id']) ? 'selected' : '' ?>>
+              <?= htmlspecialchars($role['role_name']) ?>
+            </option>
           <?php endforeach; ?>
         </select>
       </div>
       <div class="col-md-4">
-        <label>Họ tên</label>
-        <input type="text" name="name" class="form-control">
+        <label for="name" class="form-label">Họ tên</label>
+        <input type="text" class="form-control" id="name" name="name" value="<?= htmlspecialchars($userToEdit['name'] ?? '') ?>">
       </div>
       <div class="col-md-4">
-        <label>Số điện thoại</label>
-        <input type="text" name="phone_number" class="form-control">
+        <label for="phone_number" class="form-label">Số điện thoại</label>
+        <input type="text" class="form-control" id="phone_number" name="phone_number" value="<?= htmlspecialchars($userToEdit['phone_number'] ?? '') ?>">
       </div>
       <div class="col-md-4">
-        <label>Địa chỉ</label>
-        <input type="text" name="address" class="form-control">
+        <label for="address" class="form-label">Địa chỉ</label>
+        <input type="text" class="form-control" id="address" name="address" value="<?= htmlspecialchars($userToEdit['address'] ?? '') ?>">
       </div>
       <div class="col-12 text-end">
-        <button type="submit" class="btn btn-orange">➕ Thêm</button>
+        <button type="submit" class="btn btn-orange">
+          <?= $userToEdit ? '💾 Cập nhật' : '➕ Thêm' ?>
+        </button>
+        <?php if ($userToEdit): ?>
+          <a href="users_crud_page.php" class="btn btn-secondary">Hủy</a>
+        <?php endif; ?>
       </div>
     </form>
   </div>
 
-  <!-- DANH SÁCH NGƯỜI DÙNG -->
   <div class="admin-box mt-5">
     <h2>Danh sách người dùng</h2>
     <table class="table table-bordered table-hover">
@@ -99,24 +138,27 @@ $roles = $roleModel->getAllRoles();
           <th>SĐT</th>
           <th>Địa chỉ</th>
           <th>Ngày tạo</th>
-          <th>Xoá</th>
+          <th colspan="2">Thao tác</th>
         </tr>
       </thead>
       <tbody>
         <?php foreach ($users as $u): ?>
           <tr>
-            <td><?= $u['user_id'] ?></td>
-            <td><?= $u['email'] ?></td>
-            <td><?= $u['name'] ?></td>
-            <td><?= $u['role_id'] == 1 ? 'Admin' : 'User' ?></td>
-            <td><?= $u['phone_number'] ?></td>
-            <td><?= $u['address'] ?></td>
-            <td><?= $u['registration_date'] ?></td>
+            <td><?= htmlspecialchars($u['user_id']) ?></td>
+            <td><?= htmlspecialchars($u['email']) ?></td>
+            <td><?= htmlspecialchars($u['name']) ?></td>
+            <td><?= htmlspecialchars($u['role_id'] == 1 ? 'Admin' : 'User') ?></td>
+            <td><?= htmlspecialchars($u['phone_number']) ?></td>
+            <td><?= htmlspecialchars($u['address']) ?></td>
+            <td><?= htmlspecialchars($u['registration_date']) ?></td>
+            <td>
+              <a href="users_crud_page.php?action=edit&user_id=<?= htmlspecialchars($u['user_id']) ?>" class="btn btn-sm btn-primary">Sửa</a>
+            </td>
             <td>
               <form method="POST" class="d-inline">
                 <input type="hidden" name="action" value="delete">
-                <input type="hidden" name="user_id" value="<?= $u['user_id'] ?>">
-                <button class="btn btn-sm btn-danger" onclick="return confirm('Xoá người dùng này?')">Xoá</button>
+                <input type="hidden" name="user_id" value="<?= htmlspecialchars($u['user_id']) ?>">
+                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xoá người dùng này không?')">Xoá</button>
               </form>
             </td>
           </tr>
