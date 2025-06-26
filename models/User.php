@@ -11,10 +11,9 @@ class User {
         }
     }
 
-    // CREATE - Thêm người dùng mới
     public function createUser($data) {
-        $sql = "INSERT INTO users (email, password, role_id, name, phone_number, address)
-                VALUES (:email, :password, :role_id, :name, :phone_number, :address)";
+        $sql = "INSERT INTO users (email, password, role_id, name, phone_number, address, registration_date)
+                VALUES (:email, :password, :role_id, :name, :phone_number, :address, :registration_date)";
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([
             ':email' => $data['email'],
@@ -22,18 +21,17 @@ class User {
             ':role_id' => $data['role_id'],
             ':name' => $data['name'],
             ':phone_number' => $data['phone_number'],
-            ':address' => $data['address']
+            ':address' => $data['address'],
+            ':registration_date' => $data['registration_date']
         ]);
     }
 
-    // READ - Lấy toàn bộ người dùng
     public function getAllUsers() {
         $sql = "SELECT * FROM users";
         $stmt = $this->conn->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // READ - Lấy người dùng theo ID
     public function getUserById($user_id) {
         $sql = "SELECT * FROM users WHERE user_id = :user_id";
         $stmt = $this->conn->prepare($sql);
@@ -41,42 +39,53 @@ class User {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // UPDATE - Cập nhật người dùng
     public function updateUser($user_id, $data) {
-        $sql = "UPDATE users SET 
+        $sql = "UPDATE users SET
                   email = :email,
                   role_id = :role_id,
                   name = :name,
                   phone_number = :phone_number,
-                  address = :address
-                WHERE user_id = :user_id";
+                  address = :address";
+
+        // Thêm trường password vào câu lệnh SQL nếu có password mới được cung cấp
+        if (isset($data['password']) && !empty($data['password'])) {
+            $sql .= ", password = :password";
+        }
+        $sql .= " WHERE user_id = :user_id";
+
         $stmt = $this->conn->prepare($sql);
-        return $stmt->execute([
+
+        $params = [
             ':email' => $data['email'],
             ':role_id' => $data['role_id'],
             ':name' => $data['name'],
             ':phone_number' => $data['phone_number'],
             ':address' => $data['address'],
             ':user_id' => $user_id
-        ]);
+        ];
+
+        // Hash mật khẩu mới trước khi thêm vào params
+        if (isset($data['password']) && !empty($data['password'])) {
+            $params[':password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+        }
+
+        return $stmt->execute($params);
     }
 
-    // DELETE - Xóa người dùng
     public function deleteUser($user_id) {
         $sql = "DELETE FROM users WHERE user_id = :user_id";
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([':user_id' => $user_id]);
     }
 
-        // AUTH - Kiểm tra đăng nhập
     public function authenticate($email, $password) {
         $sql = "SELECT * FROM users WHERE email = :email";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([':email' => $email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-        // So sánh plain text
-        if ($user && $password === $user['password']) {
+
+        // So sánh mật khẩu đã được hash
+        if ($user && password_verify($password, $user['password'])) {
             return $user;
         }
         return false;

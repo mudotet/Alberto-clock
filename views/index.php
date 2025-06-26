@@ -50,7 +50,7 @@ $totalPages = ceil($total / $limit);
           <div class="watch-card shadow-sm h-100">
             <?php
               $imagePath = !empty($watch['watches_images'])
-                ? "../assets/" . htmlspecialchars($watch['watches_images'])
+                ? "../assets/images/Ảnh đồng hồ/{$brandFolder}/" . htmlspecialchars($watch['watches_images'])
                 : "../assets/images/Ảnh đồng hồ/default.jpg";
             ?>
             <img src="<?= $imagePath ?>" alt="Đồng hồ" class="img-fluid mb-2 watch-img">

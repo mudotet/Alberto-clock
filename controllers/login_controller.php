@@ -34,6 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 } else {
+    // Nếu không phải POST request, chuyển về trang đăng nhập
     header("Location: ../views/login.php");
     exit();
 }
