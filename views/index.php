@@ -68,20 +68,29 @@ $totalPages = ceil($total / $limit);
   <?php if ($totalPages > 1): ?>
     <nav class="d-flex justify-content-center mt-4">
       <ul class="pagination">
-        <?php if ($page > 1): ?>
+        <?php
+        // Nếu không phải trang đầu tiên thì hiển thị nút "Trước"
+        if ($page > 1): ?>
           <li class="page-item">
+            <!-- Khi bấm sẽ chuyển về trang trước (page - 1) -->
             <a class="page-link" href="?brand=<?= $brand_id ?>&page=<?= $page - 1 ?>">Trước</a>
           </li>
         <?php endif; ?>
 
-        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+        <?php
+        // Vòng lặp để hiển thị số trang (1, 2, 3, ...)
+        for ($i = 1; $i <= $totalPages; $i++): ?>
           <li class="page-item <?= $i == $page ? 'active' : '' ?>">
+            <!-- Khi bấm sẽ chuyển đến trang $i -->
             <a class="page-link" href="?brand=<?= $brand_id ?>&page=<?= $i ?>"><?= $i ?></a>
           </li>
         <?php endfor; ?>
 
-        <?php if ($page < $totalPages): ?>
+        <?php
+        // Nếu chưa phải trang cuối thì hiển thị nút "Sau"
+        if ($page < $totalPages): ?>
           <li class="page-item">
+            <!-- Khi bấm sẽ chuyển về trang sau (page + 1) -->
             <a class="page-link" href="?brand=<?= $brand_id ?>&page=<?= $page + 1 ?>">Sau</a>
           </li>
         <?php endif; ?>

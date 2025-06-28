@@ -63,9 +63,17 @@ if (!$watchDetail) {
             <i class="fa-solid fa-cart-shopping me-1"></i> Thêm vào giỏ
           </button>
         </form>
-        <a class="btn btn-dark" href="checkout.php?amount=<?= $watchDetail['price'] ?>&model=<?= urlencode($watchDetail['model']) ?>">
-          <i class="fa-solid fa-bolt me-1"></i> Mua ngay
-        </a>
+        <?php if (isset($_SESSION['user'])): ?>
+          <!-- Nếu đã đăng nhập, cho phép mua ngay -->
+          <a class="btn btn-dark" href="checkout.php?amount=<?= $watchDetail['price'] ?>&model=<?= urlencode($watchDetail['model']) ?>">
+            <i class="fa-solid fa-bolt me-1"></i> Mua ngay
+          </a>
+        <?php else: ?>
+          <!-- Nếu chưa đăng nhập, chuyển sang trang đăng nhập -->
+          <a class="btn btn-dark" href="login.php?redirect=<?= urlencode($_SERVER['REQUEST_URI']) ?>">
+            <i class="fa-solid fa-bolt me-1"></i> Mua ngay
+          </a>
+        <?php endif; ?>
       </div>
     </div>
 

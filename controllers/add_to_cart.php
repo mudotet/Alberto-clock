@@ -4,15 +4,14 @@ require_once '../models/Cart.php';
 require_once '../models/CartDetail.php';
 $user_id = $_SESSION['user']['id'] ?? 0;
 if (!$user_id) {
-    http_response_code(400);
     echo json_encode(['error' => 'Bạn chưa đăng nhập!']);
     exit;
 }
 if(!isset($_POST['watch_id']) || !isset($_POST['quantity'])) {
-    http_response_code(400);
     echo json_encode(['error' => 'Thiếu thông tin sản phẩm!']);
     exit;
 }
+
 $watch_id = $_POST['watch_id'] ?? 0;
 $quantity = $_POST['quantity'] ?? 1;
 
