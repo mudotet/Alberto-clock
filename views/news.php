@@ -162,7 +162,7 @@
         </div>
 
         <!-- Patek Philippe News 2 -->
-        <div class="col-md-6 col-lg-4">
+        <div class="col-md-6 col-lg-3">
             <div class="card h-100 shadow news-card">
                 <div class="news-img-wrap">
                     <img src="../assets/images/Thumnail/Patek_2.jpg" class="card-img-top news-img" alt="Patek Chairman">

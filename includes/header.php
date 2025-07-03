@@ -69,28 +69,40 @@ $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
   const cartItemsDiv = document.getElementById('cart-items');
   const cartBadge = document.getElementById('cart-badge');
 
-  // Hàm cập nhật nội dung giỏ hàng từ server
+  // Hàm này dùng để lấy dữ liệu giỏ hàng từ server và cập nhật giao diện sidebar giỏ hàng
   function loadCartSidebar() {
+    // Gửi request GET tới file PHP để lấy dữ liệu giỏ hàng (dạng JSON)
     fetch('../controllers/get_cart_sidebar.php')
-      .then(res => res.json())
+      .then(res => res.json()) // Chuyển response thành object JSON
       .then(data => {
+        // Khởi tạo biến html để xây dựng bảng sản phẩm trong giỏ
         let html = '<table><thead><tr><th>Ảnh</th><th>Số lượng</th></tr></thead><tbody>';
-        let totalItems = 0;
+        let totalItems = 0; // Biến đếm tổng số sản phẩm
+
+        // Nếu có sản phẩm trong giỏ hàng
         if (data.items && data.items.length > 0) {
           data.items.forEach(item => {
+            // Thêm từng dòng sản phẩm vào bảng
             html += `<tr>
               <td><img src="../assets/${item.watches_images}" alt="" /></td>
               <td>${item.quantity}</td>
             </tr>`;
+            // Cộng dồn số lượng sản phẩm
             totalItems += parseInt(item.quantity);
           });
         } else {
+          // Nếu giỏ hàng trống, hiển thị thông báo
           html += '<tr><td colspan="2" class="text-center">Giỏ hàng trống</td></tr>';
         }
         html += '</tbody></table>';
+
+        // Gán nội dung bảng vào div hiển thị sản phẩm trong sidebar
         cartItemsDiv.innerHTML = html;
+
+        // Hiển thị tổng số sản phẩm (nếu có) ở dưới bảng
         document.getElementById('cart-total').innerText = totalItems > 0 ? `Tổng sản phẩm: ${totalItems}` : '';
-        // Hiển thị badge số lượng trên icon
+
+        // Hiển thị badge số lượng trên icon giỏ hàng (nếu có sản phẩm)
         if (cartBadge) {
           cartBadge.textContent = totalItems > 0 ? totalItems : '';
         }

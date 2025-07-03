@@ -19,7 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'registration_date' => date('Y-m-d H:i:s')
         ]);
     } elseif ($_POST['action'] === 'delete') {
+      if($_POST['role_id'] == 1 && $_SESSION['user_role'] != 1) {
+        // Chỉ cho phép admin xoá người dùng khác, không cho phép xoá chính
+        echo "<script>alert('Bạn không có quyền xoá người dùng này!');</script>";
+      }else{
         $userModel->deleteUser($_POST['user_id']);
+      }
     }
     header('Location: users_curd_page.php');
     exit();
@@ -94,7 +99,6 @@ $roles = $roleModel->getAllRoles();
     <table class="table table-bordered table-hover">
       <thead>
         <tr>
-          <th>ID</th>
           <th>Email</th>
           <th>Họ tên</th>
           <th>Vai trò</th>
@@ -105,9 +109,9 @@ $roles = $roleModel->getAllRoles();
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($users as $u): ?>
+        <?php foreach (array_reverse($users) as $u):
+          ?>
           <tr>
-            <td><?= $u['user_id'] ?></td>
             <td><?= $u['email'] ?></td>
             <td><?= $u['name'] ?></td>
             <td><?= $u['role_id'] == 1 ? 'Admin' : 'User' ?></td>
@@ -118,7 +122,10 @@ $roles = $roleModel->getAllRoles();
               <form method="POST" class="d-inline">
                 <input type="hidden" name="action" value="delete">
                 <input type="hidden" name="user_id" value="<?= $u['user_id'] ?>">
-                <button class="btn btn-sm btn-danger" onclick="return confirm('Xoá người dùng này?')">Xoá</button>
+                <input type="hidden" name="role_id" value="<?= $u['role_id'] ?>">
+                <button class="btn btn-sm btn-danger"
+    onclick="return confirm('<?= $u['role_id'] == 1 ? 'Bạn không thể xóa tài khoản admin' : 'Xoá người dùng này?' ?>')"
+>Xoá</button>
               </form>
             </td>
           </tr>
@@ -131,4 +138,4 @@ $roles = $roleModel->getAllRoles();
 <?php include '../includes/footer.php'; ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html
+</html>
