@@ -99,7 +99,7 @@ $watches = $watchModel->getAllWatches();
 
     <div class="admin-card mx-auto" style="max-width: 1100px;">
         <h2><?= ($action === 'edit' && isset($watch)) ? 'Sửa đồng hồ' : 'Thêm đồng hồ mới' ?></h2>
-        <form method="post" action="<?= ($action === 'edit' && isset($watch)) ? '?action=edit&id=' . $watch['watch_id'] : '?action=add' ?>">
+        <form method="post" action="<?= ($action === 'edit' && isset($watch)) ? '?action=edit&id=' . $watch['watch_id'] : '?action=add' ?>" enctype="multipart/form-data">
             <div class="row g-3">
                 <div class="col-md-3">
                     <label class="form-label">Brand ID</label>
@@ -131,7 +131,10 @@ $watches = $watchModel->getAllWatches();
                 </div>
                 <div class="col-md-3">
                     <label class="form-label">Images</label>
-                    <input type="text" name="watches_images" class="form-control" value="<?= $watch['watches_images'] ?? '' ?>">
+                    <div class="custom-file">
+                        <input type="file" name="watches_images" class="form-control custom-file-input" id="watches_images">
+                        <label class="custom-file-label" for="watches_images" id="fileLabel"><?= $watch['watches_images'] ?? 'Chọn ảnh...' ?></label>
+                    </div>
                 </div>
                 <div class="col-12 text-end mt-3">
                     <button type="submit" class="btn btn-orange px-4"><?= ($action === 'edit' && isset($watch)) ? 'Cập nhật' : 'Thêm mới' ?></button>
@@ -149,8 +152,6 @@ $watches = $watchModel->getAllWatches();
             <table class="table table-bordered table-hover align-middle mb-0">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Brand ID</th>
                         <th>Model</th>
                         <th>Price</th>
                         <th>Type</th>
@@ -162,10 +163,8 @@ $watches = $watchModel->getAllWatches();
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($watches as $w): ?>
+                    <?php foreach (array_reverse($watches) as $w): ?>
                         <tr>
-                            <td><?= htmlspecialchars($w['watch_id']) ?></td>
-                            <td><?= htmlspecialchars($w['brand_id']) ?></td>
                             <td><?= htmlspecialchars($w['model']) ?></td>
                             <td><?= htmlspecialchars($w['price']) ?></td>
                             <td><?= htmlspecialchars($w['type']) ?></td>
@@ -196,5 +195,32 @@ $watches = $watchModel->getAllWatches();
 </div>
 
 <?php include '../includes/footer.php'; ?>
+<script>
+    const input = document.getElementById('watches_images');
+    const label = document.getElementById('fileLabel');
+    input.addEventListener('change', function(e) {
+        const fileName = e.target.files[0] ? e.target.files[0].name : 'Chọn ảnh...';
+        label.textContent = fileName;
+    });
+</script>
+<style>
+    .custom-file-input {
+        cursor: pointer;
+    }
+    .custom-file-label {
+        margin-top: 6px;
+        display: block;
+        color: #8B4000;
+        font-size: 0.95rem;
+        background: #fff8f0;
+        border-radius: 6px;
+        padding: 6px 12px;
+        border: 1px solid #e0c9b3;
+        transition: border-color 0.2s;
+    }
+    .custom-file-input:focus + .custom-file-label {
+        border-color: #8B4000;
+    }
+</style>
 </body>
 </html>
